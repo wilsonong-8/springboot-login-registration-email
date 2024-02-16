@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.NaturalId;
 
-@Entity
+@Entity(name = "\"user\"")
 @Getter
 @Setter
 @NoArgsConstructor
