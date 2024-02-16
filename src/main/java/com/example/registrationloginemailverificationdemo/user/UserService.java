@@ -2,6 +2,8 @@ package com.example.registrationloginemailverificationdemo.user;
 
 import com.example.registrationloginemailverificationdemo.exception.UserAlreadyExistsException;
 import com.example.registrationloginemailverificationdemo.registration.RegistrationRequest;
+import com.example.registrationloginemailverificationdemo.registration.token.VerificationToken;
+import com.example.registrationloginemailverificationdemo.registration.token.VerificationTokenRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,6 +16,7 @@ import java.util.Optional;
 public class UserService implements IUserService{
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final VerificationTokenRepository tokenRepository;
 
     @Override
     public List<User> getUsers() {
@@ -39,5 +42,11 @@ public class UserService implements IUserService{
     @Override
     public Optional<User> findByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public void saveUserVerificationToken(User theUser, String token) {
+        var verificationToken = new VerificationToken(token,theUser);
+        tokenRepository.save(verificationToken);
     }
 }
