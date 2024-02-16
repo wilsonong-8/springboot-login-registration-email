@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,10 +17,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class RegistrationController {
 
     private final UserService userService;
-    private ApplicationEventPublisher publisher;
+    private final ApplicationEventPublisher publisher;
 
     @PostMapping
-    public String registerUser(RegistrationRequest registrationRequest, final HttpServletRequest request) {
+    public String registerUser(@RequestBody RegistrationRequest registrationRequest, final HttpServletRequest request) {
         User user = userService.registerUser(registrationRequest);
         //publish Registration Event
         publisher.publishEvent(new RegistrationCompleteEvent(user, applicationURL(request)));

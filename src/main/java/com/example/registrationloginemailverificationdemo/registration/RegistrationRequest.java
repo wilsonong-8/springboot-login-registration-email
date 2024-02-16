@@ -1,6 +1,5 @@
 package com.example.registrationloginemailverificationdemo.registration;
 
-import org.hibernate.annotations.NaturalId;
 
 public record RegistrationRequest(
         String firstName,
