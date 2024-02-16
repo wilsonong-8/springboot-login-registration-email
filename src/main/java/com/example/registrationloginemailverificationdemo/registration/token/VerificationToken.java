@@ -40,7 +40,7 @@ public class VerificationToken {
 
     private Date getTokenExpirationTime() {
         Calendar calendar = Calendar.getInstance();
-//        calendar.setTimeInMillis(new Date().getTime());
+        calendar.setTimeInMillis(new Date().getTime());
         calendar.add(Calendar.MINUTE,EXPIRATION_TIME);
 
         return new Date(calendar.getTime().getTime());
